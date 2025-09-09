@@ -1,0 +1,33 @@
+@import '../../vendor/livewire/flux/dist/flux.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme{
+    --font-inter: 'Inter'
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+
+/**
+    The lines above are intact.
+    The lines below were added by maryUI installer.
+*/
+
+/** daisyUI */
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+
+/* maryUI */
+@source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
+
+/* Theme toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+* Paginator - Traditional style
+* Because Laravel defaults does not match well the design of daisyUI.
+*/
+
