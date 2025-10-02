@@ -42,6 +42,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
+                    
                      <div class="mt-20">
                     @if ($meals_per_week && $people_per_meal)
                     <h1 class="text-lg font-inter "> {{ $meals_per_week  }} meals for {{ $people_per_meal }} people per week</h1>

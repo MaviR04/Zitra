@@ -7,6 +7,9 @@ use Livewire\WithPagination;
 use App\Models\Meal;
 use Livewire\Attributes\On; 
 use App\Models\Subscription;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SubscriptionFinished;
+
 
 class MealContainer extends Component
 {
@@ -33,13 +36,12 @@ class MealContainer extends Component
         }
 
         $this->subscription = $user->subscription;
-        
-        $this->SubscriptionMealsNo = $this->subscription->meals_per_week;
 
         if (!$this->subscription) {
             $this->subscriptionStatus = 'no_subscription';
         } elseif ($this->subscription->meals()->count() === 0) {
-            $this->subscriptionStatus = 'subscription_incomplete'; // your "half created"
+            $this->subscriptionStatus = 'subscription_incomplete';
+            $this->SubscriptionMealsNo = $this->subscription->meals_per_week; 
         } else {
             $this->subscriptionStatus = 'subscription_complete';
         }
@@ -58,13 +60,29 @@ class MealContainer extends Component
                 if (count($this->cart) < $this->SubscriptionMealsNo) {
                     $this->cart[] = $mealId;
                 }
-            }
+            }   
             // Update session
             session()->put('cart', $this->cart);
 
-
             $this->dispatch('cart-updated');
         }
+        
+    public function saveCartToSubscription()
+    {
+        $user = auth()->user();
+        $subscription = $user->subscription;
+        if (! $subscription) {
+            return session()->flash('error', 'You don’t have an active subscription.');
+        }
+        $mealIds = session()->get('cart', []);
+        if (empty($mealIds)) {
+            return session()->flash('error', 'Your cart is empty.');
+        }
+        $subscription->meals()->sync($mealIds);
+        session()->forget('cart');
+        Mail::to($user)->queue(new SubscriptionFinished());
+        return redirect()->route('checkout_confirm')->with('success', 'Meals added to your subscription!');
+    }
 
 
     public function toggleMealSelection($mealId)
@@ -103,6 +121,7 @@ class MealContainer extends Component
 
         return $query->paginate(8); // adjust per page
     }
+    
  public function render()
     {
     

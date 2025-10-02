@@ -112,6 +112,12 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'mongodb' => [
+        'driver' => 'mongodb',
+        'dsn' => env('MONGODB_URI', 'mongodb+srv://Mavinda:<DGoJ5R6ce7ufdhjF>@cluster0.upydjtl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+        'database' => env('MONGODB_DATABASE', 'laravel_app'),
+    ],
+
     ],
 
     /*

@@ -11,12 +11,15 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/sanctum": "^4.2",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
         "livewire/livewire": "^3.6",
         "livewire/volt": "^1.7.0",
-        "robsontenorio/mary": "^2.4"
+        "mongodb/laravel-mongodb": "5.5",
+        "robsontenorio/mary": "^2.4",
+        "symfony/mailer": "^7.3",
+        "symfony/mailtrap-mailer": "^7.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

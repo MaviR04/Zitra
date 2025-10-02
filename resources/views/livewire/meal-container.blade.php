@@ -4,13 +4,20 @@
     <p>Please log in to subscribe and view personalized meals.</p>
 
     @elseif ($subscriptionStatus === 'no_subscription')
-    <p>You don’t have a subscription yet. <a href="{{ route('subscription') }}">Start one here</a>.</p>
+    <p class=" font-inter">You don’t have a subscription yet. <a class=" underline hover:text-blue-400" href="{{ route('subscription') }}">Start one here</a>.</p>
 
     @elseif ($subscriptionStatus === 'subscription_incomplete')
-    <p>Your subscription is created but you haven’t selected meals yet. Choose from below:</p>
-@foreach ($renderedcart as $cartitem)
-
-@endforeach
+        @if (count($cart) === 0)
+            <p class="font-inter mb-2 text-md">Your subscription is created but you haven’t selected meals yet. Choose from below:</p>
+        @elseif(count($cart) === $SubscriptionMealsNo)
+        <div class="flex justify-between items-center" wire:click="saveCartToSubscription">
+            <span class="font-inter font-semibold text-lg">{{ count($cart) }}/{{ $SubscriptionMealsNo }} Meals Selected</span>
+            <button class="btn  btn-primary">Confirm Meals and Checkout</button>
+        </div>
+            
+        @else
+            <span class="font-inter font-semibold text-lg">{{ count($cart) }}/{{ $SubscriptionMealsNo }} Meals Selected</span>
+        @endif
     @endif
     <!-- Filter Buttons -->
     <div class="flex gap-3 mb-6 justify-center ">

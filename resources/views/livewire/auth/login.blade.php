@@ -6,7 +6,8 @@
 
     <form method="POST" wire:submit="login" class="flex flex-col gap-6">
         <!-- Email Address -->
-        <flux:input
+        <flux:input 
+            class="text-white p-2"
             wire:model="email"
             :label="__('Email address')"
             type="email"
@@ -19,6 +20,7 @@
         <!-- Password -->
         <div class="relative">
             <flux:input
+                class="text-white p-2"
                 wire:model="password"
                 :label="__('Password')"
                 type="password"
