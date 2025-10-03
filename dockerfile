@@ -33,6 +33,9 @@ RUN mkdir -p storage/app/public \
 # Create storage symlink
 RUN php artisan storage:link
 
+# Copy default images into storage/app/public
+COPY storage/app/public/ storage/app/public/
+
 # inside your container
 RUN ls -l public/storage
 RUN ls -l storage/app/public
