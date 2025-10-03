@@ -28,6 +28,10 @@ RUN mkdir -p storage/app/public \
     && chown -R www-data:www-data storage \
     && chmod -R 755 storage
 
+    # inside your container
+ls -l public/storage
+ls -l storage/app/public
+
 # Create storage symlink
 RUN php artisan storage:link
 
