@@ -24,6 +24,13 @@ COPY . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader
 
+RUN mkdir -p storage/app/public \
+    && chown -R www-data:www-data storage \
+    && chmod -R 755 storage
+
+# Create storage symlink
+RUN php artisan storage:link
+
 # Copy package.json for caching and install node deps
 RUN npm ci && npm run build
 
