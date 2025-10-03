@@ -28,12 +28,14 @@ RUN mkdir -p storage/app/public \
     && chown -R www-data:www-data storage \
     && chmod -R 755 storage
 
-    # inside your container
-RUN ls -l public/storage
-RUN ls -l storage/app/public
+
 
 # Create storage symlink
 RUN php artisan storage:link
+
+# inside your container
+RUN ls -l public/storage
+RUN ls -l storage/app/public
 
 # Copy package.json for caching and install node deps
 RUN npm ci && npm run build
