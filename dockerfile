@@ -25,7 +25,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install --no-dev --optimize-autoloader
 
 # Copy package.json for caching and install node deps
-COPY package*.json ./
 RUN npm ci && npm run build
 
 # Set Apache to serve Laravel's public folder
