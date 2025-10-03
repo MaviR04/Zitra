@@ -17,8 +17,8 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer first for caching
-COPY composer.json composer.lock ./
+# Copy  the app
+COPY . .
 
 # Install PHP dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -28,8 +28,7 @@ RUN composer install --no-dev --optimize-autoloader
 COPY package*.json ./
 RUN npm ci && npm run build
 
-# Copy the rest of the app
-COPY . .
+
 
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
