@@ -3,7 +3,7 @@
     "dockerfilePath": "./dockerfile"
   },
   "deploy": {
-    "startCommand": "php artisan storage:link && apache2-foreground"
+    "startCommand": "apache2-foreground"
   },
   "variables": [
     "APP_KEY",
