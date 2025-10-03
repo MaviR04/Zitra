@@ -29,8 +29,8 @@ RUN mkdir -p storage/app/public \
     && chmod -R 755 storage
 
     # inside your container
-ls -l public/storage
-ls -l storage/app/public
+RUN ls -l public/storage
+RUN ls -l storage/app/public
 
 # Create storage symlink
 RUN php artisan storage:link
